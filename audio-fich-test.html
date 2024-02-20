@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .music-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        audio {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .control-button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .control-button:hover {
+            background-color: #45a049;
+        }
+
+        #musicImage {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Music Player</h1>
+        <div class="music-player">
+            <audio id="audioPlayer" controls>
+                <source id="musicSource" src="your-music1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <img id="musicImage" src="music1.jpg" alt="Music Image">
+            <div class="controls">
+                <button class="control-button" id="playButton">&#9658;</button>
+                <button class="control-button" id="pauseButton">&#10074;&#10074;</button>
+                <button class="control-button" id="stopButton">&#9724;</button>
+                <select id="musicSelect">
+                    <option value="SpotifyMate.com%20-%20Fluxxwave%20-%20Clovis%20Reyes.mp3" data-image="Fluxxwave.png">Music 1</option>
+                    <option value="SpotifyMate.com%20-%20Shameless%20-%20HARDSTYLE%20-%20Whippa.mp3" data-image="Shameless-Hardstyle.jpg">Music 2</option>
+                    <option value="SpotifyMate.com%20-%20Menace%20-%20visioner..mp3" data-image="Menace.jpg">Music 3</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById("audioPlayer");
+        const playButton = document.getElementById("playButton");
+        const pauseButton = document.getElementById("pauseButton");
+        const stopButton = document.getElementById("stopButton");
+        const musicSelect = document.getElementById("musicSelect");
+        const musicSource = document.getElementById("musicSource");
+        const musicImage = document.getElementById("musicImage");
+
+        playButton.addEventListener("click", function() {
+            audioPlayer.play();
+        });
+
+        pauseButton.addEventListener("click", function() {
+            audioPlayer.pause();
+        });
+
+        stopButton.addEventListener("click", function() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        });
+
+        musicSelect.addEventListener("change", function() {
+            const selectedMusic = musicSelect.value;
+            const selectedImage = musicSelect.options[musicSelect.selectedIndex].getAttribute("data-image");
+            musicSource.src = selectedMusic;
+            musicImage.src = selectedImage;
+            audioPlayer.load();
+        });
+    </script>
+</body>
+
+</html>
